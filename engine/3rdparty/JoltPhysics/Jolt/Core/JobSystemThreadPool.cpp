@@ -6,6 +6,7 @@
 #include <Jolt/Core/JobSystemThreadPool.h>
 #include <Jolt/Core/Profiler.h>
 #include <Jolt/Core/FPException.h>
+#include <chrono>
 
 JPH_SUPPRESS_WARNINGS_STD_BEGIN
 #include <algorithm>
@@ -437,7 +438,7 @@ void JobSystemThreadPool::QueueJobInternal(Job *inJob)
 				mSemaphore.Release((uint)mThreads.size()); 
 
 				// Sleep a little (we have to wait for other threads to update their head pointer in order for us to be able to continue)
-				this_thread::sleep_for(100us);
+				std::this_thread::sleep_for(100us);
 				continue;
 			}
 		}
